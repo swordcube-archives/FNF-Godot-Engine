@@ -9,7 +9,7 @@
 config_version=5
 
 _global_script_classes=[{
-"base": "ColorRect",
+"base": "ReferenceRect",
 "class": &"Alphabet",
 "language": &"GDScript",
 "path": "res://scenes/game/ui/Alphabet.gd"
@@ -43,6 +43,16 @@ _global_script_classes=[{
 "class": &"EventGroup",
 "language": &"GDScript",
 "path": "res://resources/EventGroup.gd"
+}, {
+"base": "Resource",
+"class": &"FreeplaySong",
+"language": &"GDScript",
+"path": "res://resources/FreeplaySong.gd"
+}, {
+"base": "Node2D",
+"class": &"HealthIcon",
+"language": &"GDScript",
+"path": "res://scenes/game/ui/HealthIcon.gd"
 }, {
 "base": "Node2D",
 "class": &"Note",
@@ -87,6 +97,8 @@ _global_script_class_icons={
 "EasyTimer": "",
 "Event": "",
 "EventGroup": "",
+"FreeplaySong": "",
+"HealthIcon": "res://editor/icons/healthicon.png",
 "Note": "",
 "Save": "",
 "Section": "",

@@ -1,5 +1,5 @@
 @tool
-extends ColorRect
+extends ReferenceRect
 
 class_name Alphabet
 
@@ -192,6 +192,11 @@ func update_text():
 	size.x = rect_size
 	size.y = y_pos + 10
 	changing = false
+	
+	on_update_text()
+	
+func on_update_text():
+	pass
 		
 func screen_center(axes:String = "XY"):
 	match axes.to_upper():

@@ -1,11 +1,48 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmx3od8eksvce"]
+[gd_scene load_steps=9 format=3 uid="uid://bmx3od8eksvce"]
 
 [ext_resource type="Script" path="res://scenes/menus/FreeplayMenu.gd" id="1_uhh0f"]
 [ext_resource type="Texture2D" uid="uid://ch5bmkxykpect" path="res://assets/images/menuBGDesat.png" id="2_2hqrc"]
+[ext_resource type="Script" path="res://resources/FreeplaySong.gd" id="2_asjuk"]
+[ext_resource type="PackedScene" uid="uid://jwf1qatnabp2" path="res://scenes/game/ui/Alphabet.tscn" id="3_pmkij"]
+[ext_resource type="PackedScene" uid="uid://dsvyl68d3e58v" path="res://scenes/game/ui/HealthIcon.tscn" id="4_xmgrq"]
+
+[sub_resource type="Resource" id="Resource_3coc5"]
+script = ExtResource("2_asjuk")
+bg_color = Color(0.435294, 0.729412, 0.945098, 1)
+song = "Test"
+icon = "bf-pixel"
+difficulties = PackedStringArray("normal")
+
+[sub_resource type="Resource" id="Resource_a5ghk"]
+script = ExtResource("2_asjuk")
+bg_color = Color(0.572549, 0.443137, 0.992157, 1)
+song = "Tutorial"
+icon = "gf"
+difficulties = null
+
+[sub_resource type="Resource" id="Resource_epix1"]
+script = ExtResource("2_asjuk")
+bg_color = Color(0.572549, 0.443137, 0.992157, 1)
+song = "Bopeebo"
+icon = "dad"
+difficulties = null
 
 [node name="FreeplayMenu" type="Node2D"]
 script = ExtResource("1_uhh0f")
+song_list = [SubResource("Resource_3coc5"), SubResource("Resource_a5ghk"), SubResource("Resource_epix1")]
 
 [node name="BG" type="Sprite2D" parent="."]
 texture = ExtResource("2_2hqrc")
 centered = false
+
+[node name="SongTemplate" parent="." instance=ExtResource("3_pmkij")]
+visible = false
+custom_minimum_size = Vector2(371, 70)
+offset_right = 371.0
+text = "Template"
+
+[node name="Icon" parent="SongTemplate" instance=ExtResource("4_xmgrq")]
+position = Vector2(448, 40)
+icon = "dad"
+
+[node name="Songs" type="Node2D" parent="."]

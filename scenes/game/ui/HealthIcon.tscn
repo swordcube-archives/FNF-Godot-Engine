@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsvyl68d3e58v"]
+
+[ext_resource type="Script" path="res://scenes/game/ui/HealthIcon.gd" id="1_rxbhg"]
+[ext_resource type="Texture2D" uid="uid://bistwu7qn4coi" path="res://assets/images/icons/face.png" id="2_ewdyv"]
+
+[node name="HealthIcon" type="Node2D"]
+script = ExtResource("1_rxbhg")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_ewdyv")
+hframes = 3

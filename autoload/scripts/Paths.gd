@@ -12,6 +12,9 @@ func sound(p:String):
 func json(p:String):
 	return "res://assets/"+p+".json"
 	
+func txt(p:String):
+	return "res://assets/"+p+".txt"
+	
 func chart_json(song:String, diff:String = "normal"):
 	return "res://assets/songs/"+song.to_lower()+"/"+diff+".json"
 	

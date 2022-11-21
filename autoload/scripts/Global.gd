@@ -12,6 +12,13 @@ var accuracy:float = 0.0
 var total_notes:int = 0
 var total_hit:float = 0.0
 
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		print("GAME CLOSED!")
+		print("SAVING SETTINGS...")
+		Settings.flush()
+		print("SAVED SETTINGS!")
+
 func switch_scene(name:String, transition:bool = true):
 	if transition:
 		get_tree().paused = true

@@ -16,12 +16,27 @@ var flash_tween:Tween
 var confirmed:bool = false
 var started_intro:bool = false
 
+func load_intro_text() -> PackedStringArray:
+	var f = FileAccess.open(Paths.txt("data/introText"), FileAccess.READ)
+	if f:
+		var split:PackedStringArray = f.get_as_text().split("\n")
+		var cool_lines:PackedStringArray = split[randi_range(0, split.size()-1)].split("--")
+		return cool_lines
+	
+	var ret_array:PackedStringArray = [
+		"fallback exclusive", 
+		"intro text"
+	]
+	return ret_array
+
 func _ready():
 	Conductor.position = -50
 	
 	Conductor.change_bpm(102.0)
 	Conductor.connect("beat_hit", func b(): beat_hit(Conductor.cur_beat))
 	title_enter.play("idle")
+	
+	cur_display_text = load_intro_text()
 	
 	await get_tree().create_timer(1.0).timeout
 	started_intro = true

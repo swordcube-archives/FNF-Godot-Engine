@@ -23,6 +23,10 @@ var settings:Dictionary = {
 	"game_2": ["D", "K"],
 	"game_3": ["D", "SPACE", "K"],
 	"game_4": ["D", "F", "J", "K"],
+	
+	# General (Might be used in other games by me)
+	"volume": 1,
+	"muted": false
 }
 
 func setup_binds():
