@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://1xn5p2ttk6vl"]
+[gd_scene load_steps=8 format=3 uid="uid://1xn5p2ttk6vl"]
 
 [ext_resource type="Script" path="res://scenes/menus/MainMenu.gd" id="1_64150"]
 [ext_resource type="Texture2D" uid="uid://bbe1fmydrcjl" path="res://assets/images/menuBG.png" id="2_pat0t"]
 [ext_resource type="SpriteFrames" path="res://assets/images/menus/main/story mode.res" id="3_4p7qh"]
+[ext_resource type="Texture2D" uid="uid://ch5bmkxykpect" path="res://assets/images/menuBGDesat.png" id="3_dais3"]
 [ext_resource type="SpriteFrames" path="res://assets/images/menus/main/freeplay.res" id="4_6kufy"]
 [ext_resource type="SpriteFrames" path="res://assets/images/menus/main/options.res" id="5_55glf"]
 [ext_resource type="FontFile" uid="uid://343uo2cl00v1" path="res://assets/fonts/vcr.ttf" id="6_03457"]
@@ -10,15 +11,22 @@
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_64150")
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="PBG" type="ParallaxBackground" parent="."]
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="PL1" type="ParallaxLayer" parent="PBG"]
 motion_scale = Vector2(0, 0.18)
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="BG" type="Sprite2D" parent="PBG/PL1"]
 position = Vector2(640, 360)
 scale = Vector2(1.1, 1.1)
 texture = ExtResource("2_pat0t")
+
+[node name="Magenta" type="Sprite2D" parent="PBG/PL1"]
+visible = false
+modulate = Color(0.992157, 0.443137, 0.607843, 1)
+position = Vector2(640, 360)
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("3_dais3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(640, 360)
@@ -57,4 +65,13 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("6_03457")
 theme_override_font_sizes/font_size = 16
-text = "Test Engine (IF YOU ARE SEEING THIS THEN SOMETHING HAS GONE VERY WRONG)"
+text = "Test Engine (Funkin v0.2.8)
+
+
+
+
+
+
+
+
+i'm fucking pissed because i lost a lot of progress on this menu while working on it"

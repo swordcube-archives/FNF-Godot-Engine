@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmx3od8eksvce"]
+
+[ext_resource type="Script" path="res://scenes/menus/FreeplayMenu.gd" id="1_uhh0f"]
+[ext_resource type="Texture2D" uid="uid://ch5bmkxykpect" path="res://assets/images/menuBGDesat.png" id="2_2hqrc"]
+
+[node name="FreeplayMenu" type="Node2D"]
+script = ExtResource("1_uhh0f")
+
+[node name="BG" type="Sprite2D" parent="."]
+texture = ExtResource("2_2hqrc")
+centered = false

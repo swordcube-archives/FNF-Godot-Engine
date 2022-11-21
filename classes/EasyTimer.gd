@@ -4,10 +4,15 @@ extends Node
 
 class_name EasyTimer
 
+signal finished
+
 var infinite:bool = false
+
+var loops:int = 0
 var loops_left:int = 0
 
 func start(duration:float, callback:Callable, loops:int = 1):
+	self.loops = loops
 	loops_left = loops
 	var timer = Timer.new()
 	timer.wait_time = duration
@@ -21,6 +26,7 @@ func start(duration:float, callback:Callable, loops:int = 1):
 				loops_left -= 1
 				callback.call(self)
 				if loops_left < 1:
+					finished.emit()
 					Audio.remove_child(timer)
 					timer.stop()
 					timer.queue_free()

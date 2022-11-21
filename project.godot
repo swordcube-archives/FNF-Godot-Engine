@@ -25,6 +25,11 @@ _global_script_classes=[{
 "path": "res://resources/BPMChangeEvent.gd"
 }, {
 "base": "Node",
+"class": &"EasyFlicker",
+"language": &"GDScript",
+"path": "res://classes/EasyFlicker.gd"
+}, {
+"base": "Node",
 "class": &"EasyTimer",
 "language": &"GDScript",
 "path": "res://classes/EasyTimer.gd"
@@ -78,6 +83,7 @@ _global_script_class_icons={
 "Alphabet": "res://editor/icons/alphabet.png",
 "AudioClone": "",
 "BPMChangeEvent": "",
+"EasyFlicker": "",
 "EasyTimer": "",
 "Event": "",
 "EventGroup": "",
