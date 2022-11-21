@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://dii11v1b0h3b5"]
+
+[ext_resource type="Script" path="res://scenes/game/strumline/StrumLine.gd" id="1_dlw3l"]
+[ext_resource type="PackedScene" uid="uid://dyiqx35fkeh28" path="res://scenes/game/strumline/Receptor.tscn" id="1_kwutr"]
+
+[node name="4K" type="Node2D"]
+script = ExtResource("1_dlw3l")
+
+[node name="Receptors" type="Node2D" parent="."]
+
+[node name="0" parent="Receptors" instance=ExtResource("1_kwutr")]
+position = Vector2(-168, 0)
+
+[node name="1" parent="Receptors" instance=ExtResource("1_kwutr")]
+position = Vector2(-56, 0)
+direction = "down"
+
+[node name="2" parent="Receptors" instance=ExtResource("1_kwutr")]
+position = Vector2(56, 0)
+direction = "up"
+
+[node name="3" parent="Receptors" instance=ExtResource("1_kwutr")]
+position = Vector2(168, 0)
+direction = "right"
+
+[node name="Sustains" type="ColorRect" parent="."]
+offset_left = -224.0
+offset_right = 224.0
+offset_bottom = 1000.0
+color = Color(1, 1, 1, 0)
+
+[node name="Notes" type="Node2D" parent="."]

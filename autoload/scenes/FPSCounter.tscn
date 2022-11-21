@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2kbah18qmmtq"]
+
+[ext_resource type="FontFile" uid="uid://343uo2cl00v1" path="res://assets/fonts/vcr.ttf" id="1_23d6w"]
+[ext_resource type="Script" path="res://autoload/scenes/FPSCounter.gd" id="1_qen8g"]
+
+[node name="FPSCounter" type="CanvasLayer"]
+process_mode = 3
+layer = 128
+script = ExtResource("1_qen8g")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 10.0
+offset_top = 3.0
+offset_right = 125.0
+offset_bottom = 29.0
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("1_23d6w")
+theme_override_font_sizes/font_size = 14
+text = "FPS: 0
+MEM: 0mb / 0mb"
+
+[node name="UpdateTimer" type="Timer" parent="."]
+autostart = true

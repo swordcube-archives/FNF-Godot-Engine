@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyiqx35fkeh28"]
+
+[ext_resource type="SpriteFrames" path="res://assets/images/game/notes/NOTE_assets.res" id="1_0m4e0"]
+[ext_resource type="Script" path="res://scenes/game/strumline/Receptor.gd" id="2_wj5xk"]
+[ext_resource type="SpriteFrames" path="res://assets/images/game/notes/NOTE_splashes.res" id="3_ur1mu"]
+
+[node name="Receptor" type="AnimatedSprite2D"]
+scale = Vector2(0.7, 0.7)
+frames = ExtResource("1_0m4e0")
+animation = &"left static"
+playing = true
+script = ExtResource("2_wj5xk")
+
+[node name="splash" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.6)
+scale = Vector2(1.4, 1.4)
+frames = ExtResource("3_ur1mu")
+animation = &"note impact 1 left"
+
+[connection signal="animation_finished" from="splash" to="." method="_on_splash_animation_finished"]

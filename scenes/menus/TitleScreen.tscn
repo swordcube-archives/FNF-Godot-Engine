@@ -1,0 +1,166 @@
+[gd_scene load_steps=10 format=3 uid="uid://dg0tn70ea4pq7"]
+
+[ext_resource type="Script" path="res://scenes/menus/TitleScreen.gd" id="1_2m4uj"]
+[ext_resource type="SpriteFrames" path="res://assets/images/menus/title/logoBumpin.res" id="2_qycs1"]
+[ext_resource type="SpriteFrames" path="res://assets/images/menus/title/gfDanceTitle.res" id="3_vxg6j"]
+[ext_resource type="SpriteFrames" uid="uid://cuc675k13f6l4" path="res://assets/images/menus/title/titleEnter.res" id="4_pfr0h"]
+[ext_resource type="PackedScene" uid="uid://jwf1qatnabp2" path="res://scenes/game/ui/Alphabet.tscn" id="5_7wy3j"]
+[ext_resource type="Texture2D" uid="uid://b6xdm7qcvaew8" path="res://assets/images/menus/title/newgrounds_logo.png" id="6_04frh"]
+
+[sub_resource type="Animation" id="Animation_mas32"]
+resource_name = "danceLeft"
+length = 0.708333
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"gfDance"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.583333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 14]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.541667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_wql26"]
+resource_name = "danceRight"
+length = 0.708333
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"gfDance"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_po0xk"]
+_data = {
+"danceLeft": SubResource("Animation_mas32"),
+"danceRight": SubResource("Animation_wql26")
+}
+
+[node name="TitleScreen" type="Node2D"]
+script = ExtResource("1_2m4uj")
+
+[node name="Objects" type="Node2D" parent="."]
+visible = false
+
+[node name="logo" type="AnimatedSprite2D" parent="Objects"]
+position = Vector2(-150, -100)
+frames = ExtResource("2_qycs1")
+animation = &"logo bumpin"
+centered = false
+
+[node name="gf" type="AnimatedSprite2D" parent="Objects"]
+position = Vector2(512, 50.4)
+frames = ExtResource("3_vxg6j")
+animation = &"gfDance"
+frame = 14
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Objects/gf"]
+libraries = {
+"": SubResource("AnimationLibrary_po0xk")
+}
+
+[node name="titleEnter" type="AnimatedSprite2D" parent="Objects"]
+position = Vector2(100, 576)
+frames = ExtResource("4_pfr0h")
+animation = &"pressed"
+centered = false
+
+[node name="Text" type="Node2D" parent="."]
+
+[node name="TextTemplate" parent="." instance=ExtResource("5_7wy3j")]
+visible = false
+
+[node name="Flash" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="ngLogo" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(640, 526.4)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("6_04frh")

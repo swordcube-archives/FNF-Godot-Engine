@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://r8ywjmvyxi1r"]
+
+[ext_resource type="Script" path="res://scenes/PlayState.gd" id="1_1tpyv"]
+[ext_resource type="PackedScene" uid="uid://dii11v1b0h3b5" path="res://scenes/game/strumline/sets/4K.tscn" id="2_ye005"]
+[ext_resource type="AudioStream" uid="uid://6xwy07k1mx8q" path="res://assets/songs/bopeebo/Inst.ogg" id="3_0f3p2"]
+[ext_resource type="AudioStream" uid="uid://bkn08imbo7k41" path="res://assets/songs/bopeebo/Voices.ogg" id="4_lok6s"]
+
+[node name="PlayState" type="Node2D"]
+script = ExtResource("1_1tpyv")
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 50
+
+[node name="OpponentStrums" parent="UI" instance=ExtResource("2_ye005")]
+position = Vector2(320, 628)
+is_opponent = true
+
+[node name="PlayerStrums" parent="UI" instance=ExtResource("2_ye005")]
+position = Vector2(960, 628)
+
+[node name="Inst" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_0f3p2")
+
+[node name="Voices" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_lok6s")

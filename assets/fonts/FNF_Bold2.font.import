@@ -1,0 +1,16 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://dq1hwj1q1v7yx"
+path="res://.godot/imported/FNF_Bold2.font-a39b84e878d093ac0c347db382256577.fontdata"
+
+[deps]
+
+source_file="res://assets/fonts/FNF_Bold2.font"
+dest_files=["res://.godot/imported/FNF_Bold2.font-a39b84e878d093ac0c347db382256577.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
