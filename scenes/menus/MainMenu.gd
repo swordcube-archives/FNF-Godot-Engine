@@ -1,11 +1,13 @@
 extends Node2D
 
 var cur_selected:int = 0
+var gamever = "0.2.8"
 
 @onready var camera:Camera2D = $Camera2D
 @onready var buttons:Node2D = $UI/Buttons
 
 func _ready():
+	$UI/Label.text = "Test Engine (Funkin v" + gamever + ")"
 	get_tree().paused = false
 	Global.skipped_title = true
 	Audio.play_music(Paths.music("menuMusic"))
