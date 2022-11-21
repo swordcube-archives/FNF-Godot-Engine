@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dg0tn70ea4pq7"]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scenes/menus/TitleScreen.gd" id="1_2m4uj"]
 [ext_resource type="SpriteFrames" path="res://assets/images/menus/title/logoBumpin.res" id="2_qycs1"]
 [ext_resource type="SpriteFrames" path="res://assets/images/menus/title/gfDanceTitle.res" id="3_vxg6j"]
 [ext_resource type="SpriteFrames" uid="uid://cuc675k13f6l4" path="res://assets/images/menus/title/titleEnter.res" id="4_pfr0h"]
-[ext_resource type="PackedScene" uid="uid://jwf1qatnabp2" path="res://scenes/game/ui/Alphabet.tscn" id="5_7wy3j"]
+[ext_resource type="PackedScene" path="res://scenes/ui/Alphabet.tscn" id="5_7wy3j"]
 [ext_resource type="Texture2D" uid="uid://b6xdm7qcvaew8" path="res://assets/images/menus/title/newgrounds_logo.png" id="6_04frh"]
 
 [sub_resource type="Animation" id="Animation_mas32"]

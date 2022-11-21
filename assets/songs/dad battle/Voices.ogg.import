@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Voices.ogg-0e7878325b423f05ffbd2cd88e2d6868.o
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
 bpm=0
 beat_count=0

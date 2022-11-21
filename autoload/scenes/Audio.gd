@@ -22,6 +22,10 @@ func play_music(path:String = "", vol:float = 1.0):
 			music.play(0.0)
 	else:
 		music.stream_paused = false
+		
+func stop_music():
+	playing_music = null
+	music.stop()
 	
 func pause_music():
 	music.stream_paused = true

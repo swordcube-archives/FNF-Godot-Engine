@@ -30,6 +30,14 @@ var old_alignment:AlphabetAlign = AlphabetAlign.LEFT
 
 var changing:bool = false
 
+var is_menu_item:bool = false
+var target_y:int = 0
+var y_mult:float = 120
+var x_add:float = 0
+var y_add:float = 0
+
+var force_x:int
+
 var bold_letters:PackedStringArray = "#$%'\\,-\"!/*.?[]^_|~abcdefghijklmnopqrstuvwxyz".split("")
 var regular_letters:PackedStringArray = "#$%'\\,-\"!/*.?[]^_|~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".split("")
 
@@ -37,6 +45,16 @@ func _ready():
 	update_text()
 
 func _process(delta):
+	if is_menu_item:
+		var scaled_y = remap(target_y, 0, 1, 0, 1.3);
+
+		var lerp_val:float = clamp(delta * 60 * 0.16, 0, 1);
+		position.y = lerp(position.y, (scaled_y * y_mult) + (720 * 0.48) + y_add, lerp_val)
+		if force_x:
+			position.x = force_x
+		else:
+			position.x = lerp(position.x, (target_y * 20) + 90 + x_add, lerp_val)
+			
 	if old_bold != bold:
 		old_bold = bold
 		old_text = ""

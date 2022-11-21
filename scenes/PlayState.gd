@@ -52,7 +52,7 @@ func _ready():
 	og_speed = opponent_strums.note_speed
 	
 func beat_hit(beat:int):
-	if(!(Conductor.is_audio_synced(inst) || Conductor.is_audio_synced(voices))):
+	if(inst.playing && !(Conductor.is_audio_synced(inst) || Conductor.is_audio_synced(voices))):
 		Conductor.position = inst.get_playback_position() * 1000.0
 		voices.seek(inst.get_playback_position())
 	
@@ -65,10 +65,12 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("skip_intro") && !skipped_intro:
 		skipped_intro = true
-		start_song()
+		if unspawn_notes[0].strum_time >= 1000:
+			start_song()
 		Conductor.position = unspawn_notes[0].strum_time - 1000
-		inst.seek(Conductor.position / 1000.0)
-		voices.seek(Conductor.position / 1000.0)
+		if unspawn_notes[0].strum_time >= 1000:
+			inst.seek(Conductor.position / 1000.0)
+			voices.seek(Conductor.position / 1000.0)
 		
 func start_song():
 	starting_song = false
@@ -83,7 +85,8 @@ func start_song():
 func _physics_process(delta):
 	for note in unspawn_notes:
 		var strum_line:StrumLine = player_strums if note.must_press else opponent_strums
-		if note.strum_time <= Conductor.position + (1500 / (strum_line.note_speed / Conductor.rate)):
+		var spawn_mult:float = (1500 / strum_line.note_speed) * Conductor.rate
+		if note.strum_time <= Conductor.position + spawn_mult:
 			skipped_intro = true
 			
 			var new_note:Note = load("res://scenes/game/notes/"+note.type+".tscn").instantiate()
@@ -106,6 +109,7 @@ func _physics_process(delta):
 				sus_note.modulate.a = 0.6
 				if i >= length-1: sus_note.is_sustain_tail = true
 				strum_line.sustains.add_child(sus_note)
+				new_note.sustain_pieces.append(sus_note)
 				
 			unspawn_notes.erase(note)
 		else:

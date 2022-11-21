@@ -12,14 +12,16 @@ var old_icon:String = ""
 
 var health:float = 50.0
 
+func update_icon():
+	var path:String = "res://assets/images/icons/"+icon+".png"
+	if !ResourceLoader.exists(path):
+		path = "res://assets/images/icons/face.png"
+	$Sprite.texture = load(path)
+
 func _process(delta):
 	if old_icon != icon:
 		old_icon = icon
-		print('bruh')
-		var path:String = "res://assets/images/icons/"+icon+".png"
-		if !ResourceLoader.exists(path):
-			path = "res://assets/images/icons/face.png"
-		$Sprite.texture = load(path)
+		update_icon()
 		
 	if old_amount != icon_amount:
 		old_amount = icon_amount

@@ -12,7 +12,7 @@ _global_script_classes=[{
 "base": "ReferenceRect",
 "class": &"Alphabet",
 "language": &"GDScript",
-"path": "res://scenes/game/ui/Alphabet.gd"
+"path": "res://scenes/ui/Alphabet.gd"
 }, {
 "base": "AudioStreamPlayer",
 "class": &"AudioClone",
@@ -52,7 +52,7 @@ _global_script_classes=[{
 "base": "Node2D",
 "class": &"HealthIcon",
 "language": &"GDScript",
-"path": "res://scenes/game/ui/HealthIcon.gd"
+"path": "res://scenes/ui/HealthIcon.gd"
 }, {
 "base": "Node2D",
 "class": &"Note",

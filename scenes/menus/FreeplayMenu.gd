@@ -1,6 +1,11 @@
 extends Node2D
 
+var cur_selected:int = 0
+var cur_difficulty:int = 0
+
 @export var song_list:Array[Resource] = []
+
+@onready var bg:Sprite2D = $BG
 @onready var grp_songs:Node2D = $Songs
 
 func _ready():
@@ -14,14 +19,50 @@ func _ready():
 		text.text = song.song
 		text.visible = true
 		text.position = Vector2(0, (70 * i) + 30)
+		text.is_menu_item = true
+		text.target_y = i
+		text.modulate.a = 0.6
 		grp_songs.add_child(text)
 		
 		var icon:HealthIcon = text.get_node("Icon")
 		icon.icon = song.icon
+		icon.update_icon()
 		icon.position.x = text.size.x + 65
 		i += 1
+		
+	change_selection()
+	
+func change_selection(change:int = 0):
+	Audio.play_sound(Paths.sound("menus/scrollMenu"))
+	grp_songs.get_child(cur_selected).modulate.a = 0.6
+	cur_selected = wrap(cur_selected + change, 0, song_list.size())
+	grp_songs.get_child(cur_selected).modulate.a = 1
+	
+	var i:int = 0
+	for child in grp_songs.get_children():
+		child.target_y = i - cur_selected
+		i += 1
+		
+	change_difficulty()
+		
+func change_difficulty(change:int = 0):
+	cur_difficulty = wrap(cur_difficulty + change, 0, song_list[cur_selected].difficulties.size())
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_cancel"):
 		Audio.play_sound(Paths.sound("menus/cancelMenu"))
 		Global.switch_scene("menus/MainMenu")
+		
+	if Input.is_action_just_pressed("ui_up") || Input.is_action_just_released("wheel_up"):
+		change_selection(-1)
+		
+	if Input.is_action_just_pressed("ui_down") || Input.is_action_just_released("wheel_down"):
+		change_selection(1)
+		
+	if Input.is_action_just_pressed("ui_accept"):
+		Audio.stop_music()
+		Global.SONG = ChartParser.loadSong(song_list[cur_selected].chart_type, song_list[cur_selected].song, song_list[cur_selected].difficulties[cur_difficulty])
+		Global.switch_scene("PlayState")
+
+func _process(delta):
+	bg.modulate = lerp(bg.modulate, song_list[cur_selected].bg_color, clamp(delta * 60 * 0.045, 0, 1))

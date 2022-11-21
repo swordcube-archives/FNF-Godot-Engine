@@ -16,6 +16,8 @@ var too_late:bool = false
 var can_be_hit:bool = true
 var must_press:bool = true
 
+var sustain_pieces:Array[Note] = []
+
 func _ready():
 	var direction_list:Array[String] = [
 		"left",
@@ -35,7 +37,7 @@ func _ready():
 		sprite.centered = false
 		
 		var frame_width = sprite.frames.get_frame(sprite.animation, sprite.frame).get_width()
-		sprite.offset.x -= (sprite.scale.x * frame_width) / 1.5
+		sprite.offset.x -= (sprite.scale.x * frame_width) / 1.4
 
 # OVERRIDE THESE TO DO CUSTOM SHIT WHEN NOTES
 # ARE HIT OR MISSED!
@@ -72,3 +74,5 @@ func _process(delta):
 			too_late = true
 	else:
 		can_be_hit = false
+		
+	if too_late: modulate.a = 0.3
