@@ -1,5 +1,8 @@
 extends Node
 
+func exists(p:String):
+	return FileAccess.file_exists(p)
+
 func image(p:String):
 	return "res://assets/images/"+p+".png"
 	
@@ -23,3 +26,6 @@ func inst(song:String):
 	
 func voices(song:String):
 	return "res://assets/songs/"+song.to_lower()+"/Voices.ogg"
+	
+func song_modchart(song:String):
+	return "res://assets/songs/"+song.to_lower()+"/modchart.tscn"

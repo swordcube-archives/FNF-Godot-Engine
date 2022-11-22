@@ -54,10 +54,25 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://scenes/ui/HealthIcon.gd"
 }, {
+"base": "Node",
+"class": &"Modchart",
+"language": &"GDScript",
+"path": "res://scenes/game/Modchart.gd"
+}, {
+"base": "Resource",
+"class": &"ModchartGroup",
+"language": &"GDScript",
+"path": "res://resources/ModchartGroup.gd"
+}, {
 "base": "Node2D",
 "class": &"Note",
 "language": &"GDScript",
 "path": "res://scenes/game/notes/Note.gd"
+}, {
+"base": "Node2D",
+"class": &"PlayState",
+"language": &"GDScript",
+"path": "res://scenes/PlayState.gd"
 }, {
 "base": "Node",
 "class": &"Save",
@@ -99,7 +114,10 @@ _global_script_class_icons={
 "EventGroup": "",
 "FreeplaySong": "",
 "HealthIcon": "res://editor/icons/healthicon.png",
+"Modchart": "",
+"ModchartGroup": "",
 "Note": "",
+"PlayState": "",
 "Save": "",
 "Section": "",
 "SectionNote": "",
@@ -127,6 +145,7 @@ Audio="*res://autoload/scenes/Audio.tscn"
 Transition="*res://autoload/scenes/Transition.tscn"
 FPSCounter="*res://autoload/scenes/FPSCounter.tscn"
 Ranking="*res://autoload/scripts/Ranking.gd"
+Highscore="*res://autoload/scripts/Highscore.gd"
 
 [debug]
 

@@ -5,6 +5,7 @@ var settings:Dictionary = {
 	"downscroll": false,
 	"centered-notes": false,
 	"ghost-tapping": true,
+	"note-offset": 0.0,
 	
 	# Appearance (Judgements)
 	"judgement-camera": "World",

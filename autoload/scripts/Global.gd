@@ -12,6 +12,8 @@ var accuracy:float = 0.0
 var total_notes:int = 0
 var total_hit:float = 0.0
 
+var is_story_mode:bool = false
+
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		print("GAME CLOSED!")

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://xbsf0s8yqks6"]
+
+[ext_resource type="Script" path="res://assets/songs/test/modchart.gd" id="1_1pcch"]
+[ext_resource type="SpriteFrames" path="res://assets/images/game/mechanics/Pendelum_Phase2.res" id="2_fc2js"]
+
+[node name="modchart" type="Node"]
+script = ExtResource("1_1pcch")
+
+[node name="pendelum" type="AnimatedSprite2D" parent="."]
+position = Vector2(640, 10)
+frames = ExtResource("2_fc2js")
+animation = &"Pendelum Phase 2"
+centered = false
+offset = Vector2(-64, 0)

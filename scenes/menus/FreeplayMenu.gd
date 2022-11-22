@@ -8,6 +8,12 @@ var cur_difficulty:int = 0
 @onready var bg:Sprite2D = $BG
 @onready var grp_songs:Node2D = $Songs
 
+@onready var score_bg:ColorRect = $ScoreBG
+@onready var score_txt:Label = $ScoreTxt
+@onready var diff_txt:Label = $DiffTxt
+
+var lerp_score:float = 0.0
+
 func _ready():
 	Global.skipped_title = true
 	Audio.play_music(Paths.music("menuMusic"))
@@ -47,6 +53,8 @@ func change_selection(change:int = 0):
 		
 func change_difficulty(change:int = 0):
 	cur_difficulty = wrap(cur_difficulty + change, 0, song_list[cur_selected].difficulties.size())
+	diff_txt.text = '< '+song_list[cur_selected].difficulties[cur_difficulty].to_upper()+' >';
+	position_highscore()
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -59,10 +67,30 @@ func _input(event):
 	if Input.is_action_just_pressed("ui_down") || Input.is_action_just_released("wheel_down"):
 		change_selection(1)
 		
+	if Input.is_action_just_pressed("ui_left"):
+		change_difficulty(-1)
+		
+	if Input.is_action_just_pressed("ui_right"):
+		change_difficulty(1)
+		
 	if Input.is_action_just_pressed("ui_accept"):
 		Audio.stop_music()
+		Global.is_story_mode = false
 		Global.SONG = ChartParser.loadSong(song_list[cur_selected].chart_type, song_list[cur_selected].song, song_list[cur_selected].difficulties[cur_difficulty])
 		Global.switch_scene("PlayState")
+		
+func position_highscore():
+	score_txt.size.x = 0.0
+	score_txt.text = "PERSONAL BEST:"+str(round(lerp_score))
+	score_txt.position.x = 1280 - score_txt.size.x - 6
+	score_bg.scale.x = 1280 - score_txt.position.x + 6
+	score_bg.position.x = 1280 - score_bg.scale.x
+	diff_txt.position.x = score_bg.position.x + (score_bg.scale.x+1) / 2
+	diff_txt.position.x -= diff_txt.size.x / 2
 
 func _process(delta):
+	var name:String = song_list[cur_selected].song
+	var diff:String = song_list[cur_selected].difficulties[cur_difficulty]
+	lerp_score = lerp(lerp_score, float(Highscore.grab(name+'-'+diff)), clamp(delta * 60 * 0.4, 0, 1))
+	position_highscore()
 	bg.modulate = lerp(bg.modulate, song_list[cur_selected].bg_color, clamp(delta * 60 * 0.045, 0, 1))

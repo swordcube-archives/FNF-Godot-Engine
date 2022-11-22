@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmx3od8eksvce"]
+[gd_scene load_steps=12 format=3 uid="uid://bmx3od8eksvce"]
 
 [ext_resource type="Script" path="res://scenes/menus/FreeplayMenu.gd" id="1_uhh0f"]
 [ext_resource type="Texture2D" uid="uid://ch5bmkxykpect" path="res://assets/images/menuBGDesat.png" id="2_2hqrc"]
 [ext_resource type="Script" path="res://resources/FreeplaySong.gd" id="2_asjuk"]
 [ext_resource type="PackedScene" path="res://scenes/ui/Alphabet.tscn" id="3_pmkij"]
 [ext_resource type="PackedScene" path="res://scenes/ui/HealthIcon.tscn" id="4_xmgrq"]
+[ext_resource type="FontFile" uid="uid://343uo2cl00v1" path="res://assets/fonts/vcr.ttf" id="6_44cp2"]
 
 [sub_resource type="Resource" id="Resource_3coc5"]
 script = ExtResource("2_asjuk")
@@ -30,9 +31,25 @@ song = "Bopeebo"
 icon = "dad"
 difficulties = null
 
+[sub_resource type="Resource" id="Resource_pn0as"]
+script = ExtResource("2_asjuk")
+chart_type = "VANILLA"
+bg_color = Color(0.572549, 0.443137, 0.992157, 1)
+song = "Fresh"
+icon = "dad"
+difficulties = null
+
+[sub_resource type="Resource" id="Resource_p4r4a"]
+script = ExtResource("2_asjuk")
+chart_type = "VANILLA"
+bg_color = Color(0.572549, 0.443137, 0.992157, 1)
+song = "Dad Battle"
+icon = "dad"
+difficulties = null
+
 [node name="FreeplayMenu" type="Node2D"]
 script = ExtResource("1_uhh0f")
-song_list = [SubResource("Resource_3coc5"), SubResource("Resource_a5ghk"), SubResource("Resource_epix1")]
+song_list = [SubResource("Resource_3coc5"), SubResource("Resource_a5ghk"), SubResource("Resource_epix1"), SubResource("Resource_pn0as"), SubResource("Resource_p4r4a")]
 
 [node name="BG" type="Sprite2D" parent="."]
 texture = ExtResource("2_2hqrc")
@@ -49,3 +66,24 @@ position = Vector2(448, 40)
 icon = "dad"
 
 [node name="Songs" type="Node2D" parent="."]
+
+[node name="ScoreBG" type="ColorRect" parent="."]
+offset_right = 1.0
+offset_bottom = 66.0
+color = Color(0, 0, 0, 0.6)
+
+[node name="ScoreTxt" type="Label" parent="."]
+offset_top = 5.0
+offset_right = 285.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("6_44cp2")
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+
+[node name="DiffTxt" type="Label" parent="."]
+offset_top = 41.0
+offset_right = 285.0
+offset_bottom = 73.0
+theme_override_fonts/font = ExtResource("6_44cp2")
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1

@@ -116,7 +116,7 @@ func _process(delta):
 	var children2 = sustains.get_children()
 	for i in children2.size():
 		var note:Note = children2[i]
-		var spawn_mult:float = (1500 / note.parent.note_speed) * Conductor.rate
+		var spawn_mult:float = (2000 / note.parent.note_speed) * Conductor.rate
 		if note.strum_time <= Conductor.position + spawn_mult:
 			note.visible = true
 			note.position.y = (0.45 if Settings.grab("downscroll") else -0.45) * (Conductor.position - note.strum_time) * (note_speed / Conductor.rate)
