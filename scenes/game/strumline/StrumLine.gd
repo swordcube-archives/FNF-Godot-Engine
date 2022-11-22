@@ -116,54 +116,48 @@ func _process(delta):
 	var children2 = sustains.get_children()
 	for i in children2.size():
 		var note:Note = children2[i]
-		var spawn_mult:float = (2000 / note.parent.note_speed) * Conductor.rate
-		if note.strum_time <= Conductor.position + spawn_mult:
-			note.visible = true
-			note.position.y = (0.45 if Settings.grab("downscroll") else -0.45) * (Conductor.position - note.strum_time) * (note_speed / Conductor.rate)
-			if Settings.grab("downscroll"):
-				note.position.y += sustains.size.y
-			
-			"""
-			if(PlayerSettings.prefs.get("Downscroll") && noteSpeed == Math.abs(noteSpeed) && note.isSustainNote) {
-				if (note.isSustainTail) {
-					note.y += 10.5 * (fakeCrochet / 400) * 1.5 * noteSpeed + (46 * (noteSpeed - 1));
-					note.y -= 46 * (1 - (fakeCrochet / 600)) * noteSpeed;
-					if(note.skinJSON.isPixel)
-						note.y += 8 + (6 - note.ogHeight) * 6;
-				}
-				note.y += (Note.spacing / 2) - (60.5 * (noteSpeed - 1));
-				note.y += 27.5 * ((PlayState.SONG.bpm / 100) - 1) * (noteSpeed - 1);
+		note.position.y = (0.45 if Settings.grab("downscroll") else -0.45) * (Conductor.position - note.strum_time) * (note_speed / Conductor.rate)
+		if Settings.grab("downscroll"):
+			note.position.y += sustains.size.y
+		
+		"""
+		if(PlayerSettings.prefs.get("Downscroll") && noteSpeed == Math.abs(noteSpeed) && note.isSustainNote) {
+			if (note.isSustainTail) {
+				note.y += 10.5 * (fakeCrochet / 400) * 1.5 * noteSpeed + (46 * (noteSpeed - 1));
+				note.y -= 46 * (1 - (fakeCrochet / 600)) * noteSpeed;
+				if(note.skinJSON.isPixel)
+					note.y += 8 + (6 - note.ogHeight) * 6;
 			}
-			"""
-			var adjusted_speed:float = note_speed / Conductor.rate
-			if Settings.grab("downscroll") && adjusted_speed == abs(adjusted_speed):
-				if note.is_sustain_tail:
-					note.position.y += 10.5 * (fake_crochet / 400.0) * 1.5 * adjusted_speed + (46.0 * (adjusted_speed - 1.0))
-					note.position.y -= 46.0 * (1.0 - (fake_crochet / 600.0)) * adjusted_speed
-					# TODO: FIX FOR PIXEL SKINS
-					# note.position.y -= 2
-					
-				note.position.y -= (fake_crochet / 15.0) * adjusted_speed
-			else:
-				note.position.y -= (fake_crochet / 15.0) * adjusted_speed
-			
-			if !note.was_good_hit && !note.must_press && note.strum_time <= Conductor.position:
-				var receptor = receptors.get_child(note.direction)
-				receptor.frame = 0
-				receptor.play_anim("confirm")
-				note.was_good_hit = true
-				note.opponent_hit()
+			note.y += (Note.spacing / 2) - (60.5 * (noteSpeed - 1));
+			note.y += 27.5 * ((PlayState.SONG.bpm / 100) - 1) * (noteSpeed - 1);
+		}
+		"""
+		var adjusted_speed:float = note_speed / Conductor.rate
+		if Settings.grab("downscroll") && adjusted_speed == abs(adjusted_speed):
+			if note.is_sustain_tail:
+				note.position.y += 10.5 * (fake_crochet / 400.0) * 1.5 * adjusted_speed + (46.0 * (adjusted_speed - 1.0))
+				note.position.y -= 46.0 * (1.0 - (fake_crochet / 600.0)) * adjusted_speed
+				# TODO: FIX FOR PIXEL SKINS
+				# note.position.y -= 2
 				
-			if !note.was_good_hit && note.must_press && note.strum_time <= Conductor.position && pressed[note.direction] && note.can_be_hit && !note.too_late:
-				var receptor = receptors.get_child(note.direction)
-				receptor.frame = 0
-				receptor.play_anim("confirm")
-				sustains.clip_contents = true
-				note.was_good_hit = true
-				note.player_hit()
-			
-			if note.strum_time < Conductor.position - 350:
-				note.queue_free()
+			note.position.y -= (fake_crochet / 15.0) * adjusted_speed
 		else:
-			note.visible = false
-			continue
+			note.position.y -= (fake_crochet / 15.0) * adjusted_speed
+		
+		if !note.was_good_hit && !note.must_press && note.strum_time <= Conductor.position:
+			var receptor = receptors.get_child(note.direction)
+			receptor.frame = 0
+			receptor.play_anim("confirm")
+			note.was_good_hit = true
+			note.opponent_hit()
+			
+		if !note.was_good_hit && note.must_press && note.strum_time <= Conductor.position && pressed[note.direction] && note.can_be_hit && !note.too_late:
+			var receptor = receptors.get_child(note.direction)
+			receptor.frame = 0
+			receptor.play_anim("confirm")
+			sustains.clip_contents = true
+			note.was_good_hit = true
+			note.player_hit()
+		
+		if note.strum_time < Conductor.position - 350:
+			note.queue_free()
