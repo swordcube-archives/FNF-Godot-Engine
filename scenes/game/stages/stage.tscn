@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7t0oosamugu3"]
+
+[ext_resource type="Script" path="res://classes/Stage.gd" id="1_5t3ka"]
+[ext_resource type="Texture2D" uid="uid://d3h71lyex6dvu" path="res://assets/images/stages/stage/stageback.png" id="2_slmts"]
+[ext_resource type="Texture2D" uid="uid://uxw1nlbm0kdu" path="res://assets/images/stages/stage/stagecurtains.png" id="3_khmd4"]
+[ext_resource type="Texture2D" uid="uid://mp4bqqwh8e73" path="res://assets/images/stages/stage/stagefront.png" id="4_kpx4w"]
+
+[node name="stage" type="Node"]
+script = ExtResource("1_5t3ka")
+
+[node name="Stageback" type="Sprite2D" parent="."]
+position = Vector2(806, 590)
+texture = ExtResource("2_slmts")
+
+[node name="Stagecurtains" type="Sprite2D" parent="."]
+position = Vector2(806, 590)
+texture = ExtResource("3_khmd4")
+
+[node name="Stagefront" type="Sprite2D" parent="."]
+position = Vector2(801, 1026)
+texture = ExtResource("4_kpx4w")
+
+[node name="Postition" type="Node2D" parent="."]
+
+[node name="Dad Pos" type="Node2D" parent="Postition"]
+position = Vector2(331, 888)
+
+[node name="BF Pos" type="Node2D" parent="Postition"]
+position = Vector2(1140, 902)
+
+[node name="GF Pos" type="Node2D" parent="Postition"]
+position = Vector2(738, 851)
+scale = Vector2(0.996401, 1.00639)
