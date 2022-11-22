@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://djd66mf03chck"]
 
 [ext_resource type="Script" path="res://scenes/menus/TitleScreen.gd" id="1_2m4uj"]
 [ext_resource type="SpriteFrames" path="res://assets/images/menus/title/logoBumpin.res" id="2_qycs1"]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://lyxov67jfrbc"]
+
+[ext_resource type="PackedScene" uid="uid://dii11v1b0h3b5" path="res://scenes/game/strumline/sets/4K.tscn" id="1_1mjuf"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="OpponentStrums" parent="." instance=ExtResource("1_1mjuf")]
+position = Vector2(320, 628)
+is_opponent = true
+
+[node name="PlayerStrums" parent="." instance=ExtResource("1_1mjuf")]
+position = Vector2(960, 628)
