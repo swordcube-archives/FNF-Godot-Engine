@@ -41,13 +41,21 @@ func _ready():
 		opponent_strums.position.y = 95
 		player_strums.position.y = 95
 		
+	# load song scripts
 	var modchart_path:String = Paths.song_modchart(SONG.name)
 	if Paths.exists(modchart_path):
-		var modchart:Modchart = load(modchart_path).instantiate()
-		modchart.PlayState = self
-		add_child(modchart)
+		var modchart:Modchart = Modchart.create(modchart_path, self)
 		modcharts.add(modchart)
+		
+	# load global scripts
+	var init_path:String = "res://assets/data/global_modcharts/"
+	var file_list:PackedStringArray = CoolUtil.list_files_in_dir(init_path)
+	for item in file_list:
+		if item.ends_with(".tscn"):
+			var modchart:Modchart = Modchart.create(init_path+item, self)
+			modcharts.add(modchart)
 	
+	# load notes
 	for section in SONG.sections:
 		for note in section.notes:
 			var gotta_hit:bool = section.player_section

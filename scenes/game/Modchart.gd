@@ -3,6 +3,12 @@ extends Node
 class_name Modchart
 
 var PlayState:PlayState
+
+static func create(path:String, instance:PlayState):
+	var modchart:Modchart = load(path).instantiate()
+	modchart.PlayState = instance
+	instance.add_child(modchart)
+	return modchart
 	
 func _process_post(delta:float):
 	pass

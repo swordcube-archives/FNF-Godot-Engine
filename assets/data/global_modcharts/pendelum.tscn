@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgtk8keqnuvhf"]
+
+[ext_resource type="Script" path="res://assets/data/global_modcharts/pendelum.gd" id="1_rrjj8"]
+[ext_resource type="SpriteFrames" path="res://assets/images/game/mechanics/Pendelum_Phase2.res" id="2_wqicd"]
+[ext_resource type="SpriteFrames" path="res://assets/images/game/mechanics/StaticHypno.res" id="3_xwaxd"]
+[ext_resource type="AudioStream" uid="uid://btpblh51yakdv" path="res://assets/sounds/mechanics/pendelum/HypnoStatic.ogg" id="4_gshq0"]
+
+[node name="pendelum" type="Node"]
+script = ExtResource("1_rrjj8")
+
+[node name="copies" type="Node" parent="."]
+
+[node name="pendelum" type="AnimatedSprite2D" parent="."]
+position = Vector2(640, 10)
+frames = ExtResource("2_wqicd")
+animation = &"Pendelum Phase 2"
+centered = false
+offset = Vector2(-64, 0)
+
+[node name="static" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(640, 360)
+scale = Vector2(0.6, 0.6)
+frames = ExtResource("3_xwaxd")
+animation = &"StaticHypno"
+playing = true
+metadata/_edit_lock_ = true
+
+[node name="annoying" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_gshq0")

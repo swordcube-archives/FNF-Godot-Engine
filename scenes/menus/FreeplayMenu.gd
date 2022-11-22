@@ -37,6 +37,7 @@ func _ready():
 		i += 1
 		
 	change_selection()
+	position_highscore()
 	
 func change_selection(change:int = 0):
 	Audio.play_sound(Paths.sound("menus/scrollMenu"))
@@ -58,8 +59,8 @@ func change_difficulty(change:int = 0):
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_cancel"):
-		Audio.play_sound(Paths.sound("menus/cancelMenu"))
 		Global.switch_scene("menus/MainMenu")
+		Audio.play_sound(Paths.sound("menus/cancelMenu"))
 		
 	if Input.is_action_just_pressed("ui_up") || Input.is_action_just_released("wheel_up"):
 		change_selection(-1)
