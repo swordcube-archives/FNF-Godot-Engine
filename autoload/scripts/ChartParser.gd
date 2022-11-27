@@ -66,28 +66,28 @@ func loadSong(type:String, song:String, diff:String = "normal"):
 			var json = CoolUtil.load_json(Paths.chart_json(song, diff)).song
 			
 			var songData:Song = Song.new()
-			songData.name = json.name
+			songData.name = json.song
 			songData.bpm = json.bpm
-			songData.scroll_speed = json.scrollSpeed
+			songData.scroll_speed = json.speed
 			songData.sections = []
 			songData.events = []
 			songData.needs_voices = json.needsVoices
-			songData.key_amount = json.keyAmount
-			songData.dad = json.dad
-			songData.gf = json.gf
-			songData.bf = json.bf
+			songData.key_amount = 4
+			songData.dad = json.player2
+			songData.gf = json.gfVersion
+			songData.bf = json.player1
 			songData.stage = json.stage
 			
-			for section in json.sections:
+			for section in json.notes:
 				var cool_sex:Section = Section.new() 
 				cool_sex.notes = []
-				cool_sex.player_section = section.playerSection
+				cool_sex.player_section = section.mustHitSection
 				cool_sex.alt_anim = section.altAnim if "altAnim" in section else false
 				cool_sex.bpm = section.bpm if "bpm" in section else 0.0
 				cool_sex.change_bpm = section.changeBPM if "changeBPM" in section else false
-				cool_sex.length_in_steps = section.lengthInSteps
+				cool_sex.length_in_steps = int(section.sectionBeats) * 4 if "sectionBeats" in section else section.lengthInSteps
 				
-				for note in section.notes:
+				for note in section.sectionNotes:
 					var alt_anim:bool = section.altAnim if "altAnim" in section else false
 					if range(note.size()).has(3) && note[3] is bool && note[3]:
 						alt_anim = note[3]

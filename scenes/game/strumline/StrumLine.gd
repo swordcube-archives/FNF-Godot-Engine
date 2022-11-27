@@ -9,24 +9,36 @@ class_name StrumLine
 @onready var notes:Node2D = $Notes
 @onready var sustains:ColorRect = $Sustains
 
+@onready var PlayState:PlayState = $"../../"
+
 func _ready():
 	if Settings.grab("downscroll"):
 		sustains.position.y -= sustains.size.y
 		
+	init()
+	
+func init():		
+	pressed = []
 	for i in receptors.get_child_count():
 		pressed.append(false)
 		
-	if !is_opponent: return
-	
-	sustains.clip_contents = true
-	var children2 = receptors.get_children()
-	for i in children2.size():
-		var receptor = children2[i]
-		receptor.connect("animation_finished", func balls():
-			if "confirm" in receptor.animation:
-				receptor.frame = 0
-				receptor.play_anim("static")
-		)
+	if !is_opponent:
+		sustains.clip_contents = false
+		var children2 = receptors.get_children()
+		for i in children2.size():
+			var receptor = children2[i]
+			for sig in receptor.animation_finished.get_connections():
+				receptor.animation_finished.disconnect(sig.callable)
+	else:
+		sustains.clip_contents = true
+		var children2 = receptors.get_children()
+		for i in children2.size():
+			var receptor = children2[i]
+			receptor.connect("animation_finished", func balls():
+				if "confirm" in receptor.animation:
+					receptor.frame = 0
+					receptor.play_anim("static")
+			)
 		
 var pressed:Array[bool] = []
 
@@ -59,7 +71,7 @@ func _input(event):
 	children2.sort_custom(func n(a, b): return a.strum_time < b.strum_time)
 	for i in children2.size():
 		var note:Note = children2[i]
-		if !dont_hit[note.direction] && !note.is_sustain && note.can_be_hit && !note.too_late && !note.was_good_hit:
+		if !dont_hit[note.direction] && note.must_press && !note.is_sustain && note.can_be_hit && !note.too_late && !note.was_good_hit:
 			if Input.is_action_just_pressed("game_"+str(note.direction)):
 				dont_hit[note.direction] = true
 				var receptor = children[note.direction]
@@ -67,6 +79,7 @@ func _input(event):
 				receptor.play_anim("confirm")
 				sustains.clip_contents = true
 				
+				PlayState.voices.volume_db = 0
 				pop_up_score(note, Ranking.judge_note(note.strum_time))
 				
 				# WE HATE STACKED NOTEs!!
@@ -74,8 +87,6 @@ func _input(event):
 					var stacked_note:Note = children2[a]
 					if stacked_note != note && stacked_note.direction == note.direction && stacked_note.strum_time - note.strum_time <= 5.0:
 						stacked_note.queue_free()
-					else:
-						continue
 				
 				note.player_hit()
 				note.queue_free()
@@ -96,6 +107,7 @@ func _process(delta):
 			var receptor = receptors.get_child(note.direction)
 			receptor.frame = 0
 			receptor.play_anim("confirm")
+			PlayState.voices.volume_db = 0
 			note.opponent_hit()
 			note.queue_free()
 			
@@ -104,12 +116,14 @@ func _process(delta):
 				if !is_instance_valid(child): continue
 				child.too_late = true
 				
+			#PlayState.voices.volume_db = -9999
 			sustains.clip_contents = false
 			if pressed[note.direction]:
 				var receptor = receptors.get_child(note.direction)
 				receptor.frame = 0
 				receptor.play_anim("press")
-				note.queue_free()
+				
+			note.queue_free()
 			
 	var fake_crochet:float = (60.0 / Global.SONG.bpm) * 1000.0
 	var fake_bpm:float = Global.SONG.bpm / Conductor.rate
@@ -149,6 +163,7 @@ func _process(delta):
 			receptor.frame = 0
 			receptor.play_anim("confirm")
 			note.was_good_hit = true
+			PlayState.voices.volume_db = 0
 			note.opponent_hit()
 			
 		if !note.was_good_hit && note.must_press && note.strum_time <= Conductor.position && pressed[note.direction] && note.can_be_hit && !note.too_late:
@@ -157,6 +172,7 @@ func _process(delta):
 			receptor.play_anim("confirm")
 			sustains.clip_contents = true
 			note.was_good_hit = true
+			PlayState.voices.volume_db = 0
 			note.player_hit()
 		
 		if note.strum_time < Conductor.position - 350:

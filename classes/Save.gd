@@ -22,11 +22,8 @@ func bind(json:String, folder:String):
 		fuck.flush()
 	
 	var file = FileAccess.open(json_path, FileAccess.READ)
-	if !file:
-		print("oh fuck")
-	else:
+	if file:
 		print("Loaded save json for "+json+" successfully")
-		
 		data = CoolUtil.load_json_from_text(file.get_as_text())
 		
 	return self
@@ -42,6 +39,6 @@ func assign(obj:String, value:Variant):
 	
 func flush():
 	var json_path:String = folder_path+folder+"/"+json+".json"
-	var file = FileAccess.open(json_path, FileAccess.READ_WRITE)
+	var file = FileAccess.open(json_path, FileAccess.WRITE)
 	if file:
 		file.store_string(JSON.stringify(data))

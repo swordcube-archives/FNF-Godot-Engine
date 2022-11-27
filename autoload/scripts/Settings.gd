@@ -25,6 +25,9 @@ var settings:Dictionary = {
 	"game_3": ["D", "SPACE", "K"],
 	"game_4": ["D", "F", "J", "K"],
 	
+	# Gameplay Modifiers
+	"play-as-opponent": false,
+	
 	# General (Might be used in other games by me)
 	"volume": 1,
 	"muted": false

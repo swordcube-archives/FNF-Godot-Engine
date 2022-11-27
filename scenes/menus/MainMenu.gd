@@ -38,11 +38,11 @@ func select_option():
 	flick.connect("finished", func():
 		for child in buttons.get_children():
 			var tween = get_tree().create_tween()
-			tween.set_ease(Tween.EASE_IN_OUT)
-			tween.set_trans(Tween.TRANS_CUBIC)
+			tween.set_ease(Tween.EASE_OUT)
+			tween.set_trans(Tween.TRANS_QUAD)
 			tween.tween_property(child, "modulate:a", 0, 0.5)
 		
-		EasyTimer.new().start(0.55, func(tmr:EasyTimer):
+		EasyTimer.new().start(0.5, func(tmr:EasyTimer):
 			match str(button.name):
 				"Story Mode":
 					pass

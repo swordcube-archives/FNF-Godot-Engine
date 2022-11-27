@@ -22,7 +22,7 @@ var modcharts:ModchartGroup
 
 func _ready():
 	modcharts = ModchartGroup.new()
-	note_offset = (Settings.grab("note-offset") + (AudioServer.get_output_latency() * 1000)) * Conductor.rate
+	note_offset = Settings.grab("note-offset") + (AudioServer.get_output_latency() * 1000)
 	
 	inst.stream = load(Paths.inst(SONG.name))
 	voices.stream = load(Paths.voices(SONG.name))
@@ -36,6 +36,13 @@ func _ready():
 	
 	Conductor.change_bpm(SONG.bpm)
 	Conductor.position = Conductor.crochet * -5.0
+	
+	if Settings.grab("play-as-opponent"):
+		opponent_strums.is_opponent = !opponent_strums.is_opponent
+		player_strums.is_opponent = !player_strums.is_opponent
+		
+		opponent_strums.init()
+		player_strums.init()
 	
 	if !Settings.grab("downscroll"):
 		opponent_strums.position.y = 95
@@ -63,10 +70,10 @@ func _ready():
 				gotta_hit = !section.player_section
 				
 			var data:UnspawnNote = UnspawnNote.new()
-			data.strum_time = note.strum_time + note_offset
+			data.strum_time = note.strum_time + (note_offset * Conductor.rate)
 			data.direction = note.direction % SONG.key_amount
 			data.sustain_length = note.sustain_length
-			data.must_press = gotta_hit
+			data.must_press = !gotta_hit if Settings.grab("play-as-opponent") else gotta_hit
 			data.type = note.type
 			data.alt_anim = note.alt_anim
 			unspawn_notes.append(data)
@@ -131,6 +138,9 @@ func start_song():
 func _physics_process(delta):
 	for note in unspawn_notes:
 		var strum_line:StrumLine = player_strums if note.must_press else opponent_strums
+		if Settings.grab("play-as-opponent"):
+			strum_line = player_strums if !note.must_press else opponent_strums
+			
 		var spawn_mult:float = (1500 / strum_line.note_speed) * Conductor.rate
 		if note.strum_time <= Conductor.position + spawn_mult:
 			skipped_intro = true

@@ -2,17 +2,17 @@
 
 [ext_resource type="Script" path="res://autoload/scenes/Transition.gd" id="1_jpsit"]
 
-[sub_resource type="Gradient" id="Gradient_ofm7v"]
+[sub_resource type="Gradient" id="Gradient_ijurn"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_vd2fc"]
-gradient = SubResource("Gradient_ofm7v")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p5eix"]
+gradient = SubResource("Gradient_ijurn")
 width = 1280
 height = 1080
 fill_from = Vector2(0, 0.497175)
 fill_to = Vector2(0, 1)
 
-[sub_resource type="Animation" id="Animation_u3h2e"]
+[sub_resource type="Animation" id="Animation_d2lon"]
 resource_name = "in"
 length = 0.55
 tracks/0/type = "value"
@@ -40,7 +40,7 @@ tracks/1/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_h6qnn"]
+[sub_resource type="Animation" id="Animation_wuvdd"]
 resource_name = "out"
 length = 0.55
 tracks/0/type = "value"
@@ -68,10 +68,10 @@ tracks/1/keys = {
 "values": [true]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mi6ef"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hxgej"]
 _data = {
-"in": SubResource("Animation_u3h2e"),
-"out": SubResource("Animation_h6qnn")
+"in": SubResource("Animation_d2lon"),
+"out": SubResource("Animation_wuvdd")
 }
 
 [node name="Transition" type="CanvasLayer"]
@@ -83,10 +83,10 @@ script = ExtResource("1_jpsit")
 offset_top = 720.0
 offset_right = 1280.0
 offset_bottom = 2160.0
-texture = SubResource("GradientTexture2D_vd2fc")
+texture = SubResource("GradientTexture2D_p5eix")
 flip_v = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Rect"]
 libraries = {
-"": SubResource("AnimationLibrary_mi6ef")
+"": SubResource("AnimationLibrary_hxgej")
 }

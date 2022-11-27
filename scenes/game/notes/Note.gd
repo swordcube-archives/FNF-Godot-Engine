@@ -2,6 +2,7 @@ extends Node2D
 
 class_name Note
 
+@onready var PlayState:PlayState = $"../../../../"
 @onready var sprite:AnimatedSprite2D = $Sprite
 @export var should_hit:bool = true
 @export var strum_time:float = 0.0
@@ -70,8 +71,9 @@ func _process(delta):
 		else:
 			can_be_hit = false
 
-		if strum_time < Conductor.position - Conductor.safe_zone_offset && !was_good_hit:
+		if strum_time < Conductor.position - Conductor.safe_zone_offset && !was_good_hit && !too_late:
 			too_late = true
+			PlayState.voices.volume_db = -9999
 	else:
 		can_be_hit = false
 		
